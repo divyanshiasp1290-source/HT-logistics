@@ -23,8 +23,11 @@ const HK_CONFIG = {
   WEB3FORMS_ENDPOINT: "https://api.web3forms.com/submit",
   WEB3FORMS_ACCESS_KEY: resolveEnv("WEB3FORMS_ACCESS_KEY", "your_web3forms_access_key_here"),
 
-  // Client recipient email where all customer enquiries & RFQ quotes will be delivered
+  // Client recipient email where customer enquiries will be delivered
   CLIENT_EMAIL: resolveEnv("CLIENT_EMAIL", "contact@hklogistics.com"),
+
+  // Public corporate email displayed across website UI
+  PUBLIC_EMAIL: "contact@hklogistics.com",
 
   // Corporate phone line
   PHONE: "+1 (800) 555-HKLOG",

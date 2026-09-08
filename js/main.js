@@ -33,11 +33,14 @@ function applyConfigBindings() {
     }
   });
 
-  // Bind email
+  // Bind public email
   document.querySelectorAll('[data-bind-email]').forEach(el => {
-    el.textContent = HK_CONFIG.CLIENT_EMAIL;
+    const displayEmail = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.PUBLIC_EMAIL) 
+      ? HK_CONFIG.PUBLIC_EMAIL 
+      : 'contact@hklogistics.com';
+    el.textContent = displayEmail;
     if (el.tagName === 'A') {
-      el.setAttribute('href', `mailto:${HK_CONFIG.CLIENT_EMAIL}`);
+      el.setAttribute('href', `mailto:${displayEmail}`);
     }
   });
 
@@ -312,12 +315,11 @@ function initEnquiryForms() {
         !uuidRegex.test(accessKey.trim());
 
       // Prepare mailto fallback payload
-      const emailSubject = encodeURIComponent(`[${refId}] HK Logistics Service Enquiry: ${service} - ${company}`);
+      const emailSubject = encodeURIComponent(`HK Logistics Service Enquiry: ${service} - ${company}`);
       const emailBody = encodeURIComponent(
         `Dear HK Logistics Commercial Team,\n\n` +
         `A new corporate enquiry has been submitted:\n\n` +
         `-----------------------------------------\n` +
-        `Reference ID: ${refId}\n` +
         `Full Name: ${fullName}\n` +
         `Company / Brand Name: ${company}\n` +
         `Corporate Email: ${email}\n` +
@@ -368,7 +370,7 @@ function initEnquiryForms() {
         `;
       }
 
-      // Prepare official Web3Forms FormData payload
+      // Prepare official Web3Forms FormData payload (clean, single entries)
       const payload = new FormData();
       payload.set('access_key', accessKey);
       payload.set('name', fullName);
@@ -378,18 +380,8 @@ function initEnquiryForms() {
       payload.set('service', service);
       payload.set('scale', pallets);
       payload.set('message', details);
-      payload.set('subject', `[${refId}] New Corporate Enquiry: ${service} - ${company}`);
-      payload.set('from_name', 'HK Logistics RFQ Portal');
-
-      // Add descriptive labeled fields for crystal-clear Web3Forms email layout
-      payload.set('Full Name', fullName);
-      payload.set('Corporate Email Address', email);
-      payload.set('Direct Phone Number', phone);
-      payload.set('Company / Brand Name', company);
-      payload.set('Primary Service Needed', service);
-      payload.set('Estimated Scale / Volume', pallets);
-      payload.set('Project Scope & Special Requirements', details);
-      payload.set('Enquiry Reference ID', refId);
+      payload.set('subject', `New Corporate Enquiry: ${service} - ${company}`);
+      payload.set('from_name', 'HK Logistics Enquiry Desk');
 
       try {
         const response = await fetch(endpoint, {
@@ -403,7 +395,7 @@ function initEnquiryForms() {
         const result = await response.json();
 
         if (result.success) {
-          // SUCCESS: Reset form, show professional confirmation
+          // SUCCESS: Reset form, show clean professional confirmation
           form.reset();
 
           if (statusBox) {
@@ -414,24 +406,20 @@ function initEnquiryForms() {
             statusBox.style.padding = '14px 18px';
             statusBox.style.borderRadius = 'var(--radius-md)';
             statusBox.innerHTML = `
-              <strong>Enquiry Successfully Sent!</strong> Reference ID: <strong>${refId}</strong>.<br>
-              Your request has been routed to our commercial team at <strong>${clientEmail}</strong>.
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg style="color:#059669; flex-shrink:0;" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                <div>
+                  <strong style="font-size:0.95rem; color:#065F46; display:block; margin-bottom:2px;">Enquiry Successfully Sent!</strong>
+                  <span style="font-size:0.875rem; color:#047857;">Thank you for contacting HK Logistics. Our team will review your requirements and get back to you shortly.</span>
+                </div>
+              </div>
             `;
           }
 
           window.showToast(
-            `Enquiry ${refId} delivered successfully to HK Logistics!`,
+            'Enquiry submitted successfully!',
             'Enquiry Sent'
           );
-
-          // Display full confirmation modal only on success
-          showEnquiryModal({
-            refId,
-            formData: { name: fullName, email, phone, company, service, pallets, details },
-            clientEmail,
-            mailtoLink,
-            isSuccess: true
-          });
         } else {
           // Web3Forms returned an error
           console.warn('Web3Forms response notice:', result);
