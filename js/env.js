@@ -11,7 +11,7 @@
 window.ENV = window.ENV || {};
 
 // Web3Forms Access Key for direct email routing
-window.ENV.WEB3FORMS_ACCESS_KEY = "your_web3forms_access_key_here";
+window.ENV.WEB3FORMS_ACCESS_KEY = "bf7fead4-d818-46e6-a62f-196941e1a216";
 
 // Client recipient email address
-window.ENV.CLIENT_EMAIL = "contact@hklogistics.com";
+window.ENV.CLIENT_EMAIL = "divyanshiasp1290@gmail.com";

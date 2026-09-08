@@ -305,6 +305,59 @@ function initEnquiryForms() {
 
       const refId = 'HK-RFQ-' + Math.floor(100000 + Math.random() * 900000);
 
+      const uuidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+      const isPlaceholderKey = !accessKey || 
+        accessKey === 'your_web3forms_access_key_here' || 
+        accessKey.includes('placeholder') ||
+        !uuidRegex.test(accessKey.trim());
+
+      // Prepare mailto fallback payload
+      const emailSubject = encodeURIComponent(`[${refId}] HK Logistics Service Enquiry: ${service} - ${company}`);
+      const emailBody = encodeURIComponent(
+        `Dear HK Logistics Commercial Team,\n\n` +
+        `A new corporate enquiry has been submitted:\n\n` +
+        `-----------------------------------------\n` +
+        `Reference ID: ${refId}\n` +
+        `Full Name: ${fullName}\n` +
+        `Company / Brand Name: ${company}\n` +
+        `Corporate Email: ${email}\n` +
+        `Direct Phone Number: ${phone}\n` +
+        `Primary Service Needed: ${service}\n` +
+        `Estimated Scale / Volume: ${pallets}\n` +
+        `Project Scope & Special Requirements: ${details}\n` +
+        `-----------------------------------------\n\n` +
+        `Please issue a formal corporate quotation.\n`
+      );
+      const mailtoLink = `mailto:${clientEmail}?subject=${emailSubject}&body=${emailBody}`;
+
+      // If Access Key is not a valid UUID, show helpful instructions & direct mailto option
+      if (isPlaceholderKey) {
+        if (statusBox) {
+          statusBox.style.display = 'block';
+          statusBox.style.background = '#FEF2F2';
+          statusBox.style.color = '#991B1B';
+          statusBox.style.border = '1px solid #FECACA';
+          statusBox.style.padding = '14px 18px';
+          statusBox.style.borderRadius = 'var(--radius-md)';
+          statusBox.innerHTML = `
+            <strong>Web3Forms Access Key Required:</strong><br>
+            <span style="font-size:0.875rem; color:#7F1D1D; display:block; margin: 4px 0 8px 0;">
+              A valid Web3Forms Access Key is needed in <code>js/env.js</code> to deliver enquiries directly to your inbox.
+            </span>
+            <ol style="margin: 0 0 12px 20px; padding:0; font-size:0.8125rem; color:#4B5563; line-height:1.5;">
+              <li>Visit <a href="https://web3forms.com" target="_blank" style="color:#1D5FA8; text-decoration:underline; font-weight:600;">web3forms.com</a> to get your free Access Key.</li>
+              <li>Paste it in <code>js/env.js</code>: <code>window.ENV.WEB3FORMS_ACCESS_KEY = "YOUR-ACCESS-KEY";</code></li>
+            </ol>
+            <a href="${mailtoLink}" class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+              <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              Send Enquiry via Email Client
+            </a>
+          `;
+        }
+        window.showToast('Please configure your Web3Forms Access Key in js/env.js', 'Configuration Required');
+        return;
+      }
+
       // Lock submission & show loading state
       isSubmitting = true;
       if (submitBtn) {
@@ -337,25 +390,6 @@ function initEnquiryForms() {
       payload.set('Estimated Scale / Volume', pallets);
       payload.set('Project Scope & Special Requirements', details);
       payload.set('Enquiry Reference ID', refId);
-
-      // Prepare mailto fallback payload
-      const emailSubject = encodeURIComponent(`[${refId}] HK Logistics Service Enquiry: ${service} - ${company}`);
-      const emailBody = encodeURIComponent(
-        `Dear HK Logistics Commercial Team,\n\n` +
-        `A new corporate enquiry has been submitted:\n\n` +
-        `-----------------------------------------\n` +
-        `Reference ID: ${refId}\n` +
-        `Full Name: ${fullName}\n` +
-        `Company / Brand Name: ${company}\n` +
-        `Corporate Email: ${email}\n` +
-        `Direct Phone Number: ${phone}\n` +
-        `Primary Service Needed: ${service}\n` +
-        `Estimated Scale / Volume: ${pallets}\n` +
-        `Project Scope & Special Requirements: ${details}\n` +
-        `-----------------------------------------\n\n` +
-        `Please issue a formal corporate quotation.\n`
-      );
-      const mailtoLink = `mailto:${clientEmail}?subject=${emailSubject}&body=${emailBody}`;
 
       try {
         const response = await fetch(endpoint, {
@@ -390,7 +424,7 @@ function initEnquiryForms() {
             'Enquiry Sent'
           );
 
-          // Display full confirmation modal
+          // Display full confirmation modal only on success
           showEnquiryModal({
             refId,
             formData: { name: fullName, email, phone, company, service, pallets, details },
@@ -399,7 +433,7 @@ function initEnquiryForms() {
             isSuccess: true
           });
         } else {
-          // Web3Forms returned an error (e.g. invalid or placeholder access key)
+          // Web3Forms returned an error
           console.warn('Web3Forms response notice:', result);
           const errMsg = result.message || 'Web3Forms submission was not completed.';
 
@@ -411,28 +445,21 @@ function initEnquiryForms() {
             statusBox.style.padding = '14px 18px';
             statusBox.style.borderRadius = 'var(--radius-md)';
             statusBox.innerHTML = `
-              <strong>Notice:</strong> ${errMsg}<br>
-              <span style="font-size:0.8125rem; color:#7F1D1D;">
-                If your Web3Forms Access Key is pending configuration in .env, you can also send this enquiry directly via your email client below.
-              </span>
+              <strong>Submission Error:</strong> ${errMsg}<br>
+              <div style="margin-top:10px;">
+                <a href="${mailtoLink}" class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  Send via Email Client Instead
+                </a>
+              </div>
             `;
           }
 
-          window.showToast(errMsg, 'Submission Notice');
-
-          // Open confirmation modal with mailto fallback so user never loses their submission
-          showEnquiryModal({
-            refId,
-            formData: { name: fullName, email, phone, company, service, pallets, details },
-            clientEmail,
-            mailtoLink,
-            isSuccess: false,
-            errorMessage: errMsg
-          });
+          window.showToast(errMsg, 'Submission Error');
         }
       } catch (err) {
         console.error('Network / Fetch error:', err);
-        const networkMsg = 'Network connection issue. Please check your internet or email us directly.';
+        const networkMsg = 'Network connection issue. Please check your internet or send via email client.';
 
         if (statusBox) {
           statusBox.style.display = 'block';
@@ -441,19 +468,18 @@ function initEnquiryForms() {
           statusBox.style.border = '1px solid #FECACA';
           statusBox.style.padding = '14px 18px';
           statusBox.style.borderRadius = 'var(--radius-md)';
-          statusBox.innerHTML = `<strong>Network Notice:</strong> ${networkMsg}`;
+          statusBox.innerHTML = `
+            <strong>Network Notice:</strong> ${networkMsg}<br>
+            <div style="margin-top:10px;">
+              <a href="${mailtoLink}" class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                Send via Email Client
+              </a>
+            </div>
+          `;
         }
 
         window.showToast(networkMsg, 'Network Notice');
-
-        showEnquiryModal({
-          refId,
-          formData: { name: fullName, email, phone, company, service, pallets, details },
-          clientEmail,
-          mailtoLink,
-          isSuccess: false,
-          errorMessage: networkMsg
-        });
       } finally {
         // Unlock button and restore state
         isSubmitting = false;
@@ -497,7 +523,7 @@ function showFormError(form, inputEl, message) {
 /* ==========================================================================
    Professional Enquiry Confirmation Modal
    ========================================================================== */
-function showEnquiryModal({ refId, formData, clientEmail, mailtoLink, isSuccess = true, errorMessage = '' }) {
+function showEnquiryModal({ refId, formData, clientEmail, mailtoLink }) {
   let modal = document.getElementById('enquiryModal');
   if (!modal) {
     modal = document.createElement('div');
@@ -506,30 +532,16 @@ function showEnquiryModal({ refId, formData, clientEmail, mailtoLink, isSuccess 
     document.body.appendChild(modal);
   }
 
-  const iconHtml = isSuccess
-    ? `<div class="modal-check-icon">
-        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-       </div>`
-    : `<div class="modal-check-icon" style="background:#FEF2F2; color:#DC2626;">
-        <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-       </div>`;
-
-  const headingText = isSuccess
-    ? 'Enquiry Successfully Submitted'
-    : 'Enquiry Ready for Dispatch';
-
-  const subHeadingText = isSuccess
-    ? `Your enquiry has been delivered via Web3Forms. Reference ID: <strong>${refId}</strong>`
-    : `Reference ID: <strong>${refId}</strong> &bull; Direct email routing prepared`;
-
   modal.innerHTML = `
     <div class="enquiry-modal-card">
       <div class="enquiry-modal-header">
         <div style="display:flex; align-items:center; gap:12px;">
-          ${iconHtml}
+          <div class="modal-check-icon">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          </div>
           <div>
-            <h3 style="margin:0; font-size:1.25rem; color:var(--primary);">${headingText}</h3>
-            <span style="font-size:0.8125rem; color:var(--text-muted);">${subHeadingText}</span>
+            <h3 style="margin:0; font-size:1.25rem; color:var(--primary);">Enquiry Successfully Submitted</h3>
+            <span style="font-size:0.8125rem; color:var(--text-muted);">Delivered via Web3Forms &bull; Reference: <strong>${refId}</strong></span>
           </div>
         </div>
         <button class="modal-close-btn" onclick="document.getElementById('enquiryModal').classList.remove('active')">&times;</button>
@@ -537,11 +549,11 @@ function showEnquiryModal({ refId, formData, clientEmail, mailtoLink, isSuccess 
 
       <div class="enquiry-modal-body">
         <p style="font-size:0.9375rem; color:var(--text-main); margin-bottom:16px;">
-          Thank you, <strong>${formData.name}</strong> from <strong>${formData.company}</strong>. Your enquiry for <strong>${formData.service}</strong> has been received.
+          Thank you, <strong>${formData.name}</strong> from <strong>${formData.company}</strong>. Your corporate enquiry for <strong>${formData.service}</strong> has been routed to our commercial desk.
         </p>
 
         <div class="enquiry-details-box">
-          <div class="detail-row"><span>Destination Email:</span> <strong>${clientEmail}</strong></div>
+          <div class="detail-row"><span>Routing To:</span> <strong>${clientEmail}</strong></div>
           <div class="detail-row"><span>Service Type:</span> <strong>${formData.service}</strong></div>
           <div class="detail-row"><span>Corporate Email:</span> <strong>${formData.email}</strong></div>
           <div class="detail-row"><span>Contact Phone:</span> <strong>${formData.phone}</strong></div>
@@ -549,7 +561,7 @@ function showEnquiryModal({ refId, formData, clientEmail, mailtoLink, isSuccess 
         </div>
 
         <p style="font-size:0.8125rem; color:var(--text-muted); margin: 16px 0;">
-          Our logistics coordinators review all corporate requests within 2 business hours. You can also open the prepared enquiry directly in your email client below:
+          Our logistics coordinators review all corporate requests within 2 business hours. You can also save a copy or open the thread directly in your email client:
         </p>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:20px;">
