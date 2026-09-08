@@ -37,7 +37,7 @@ function applyConfigBindings() {
   document.querySelectorAll('[data-bind-email]').forEach(el => {
     const displayEmail = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.PUBLIC_EMAIL) 
       ? HK_CONFIG.PUBLIC_EMAIL 
-      : 'contact@hklogistics.com';
+      : 'info@htlogistics-spolka.com';
     el.textContent = displayEmail;
     if (el.tagName === 'A') {
       el.setAttribute('href', `mailto:${displayEmail}`);
@@ -296,7 +296,7 @@ function initEnquiryForms() {
 
       const clientEmail = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.CLIENT_EMAIL)
         ? HK_CONFIG.CLIENT_EMAIL
-        : 'contact@hklogistics.com';
+        : 'info@htlogistics-spolka.com';
 
       const accessKey = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.WEB3FORMS_ACCESS_KEY)
         ? HK_CONFIG.WEB3FORMS_ACCESS_KEY
@@ -315,9 +315,9 @@ function initEnquiryForms() {
         !uuidRegex.test(accessKey.trim());
 
       // Prepare mailto fallback payload
-      const emailSubject = encodeURIComponent(`HK Logistics Service Enquiry: ${service} - ${company}`);
+      const emailSubject = encodeURIComponent(`HK Logistic Sp. z o.o. Service Enquiry: ${service} - ${company}`);
       const emailBody = encodeURIComponent(
-        `Dear HK Logistics Commercial Team,\n\n` +
+        `Dear HK Logistic Commercial Team,\n\n` +
         `A new corporate enquiry has been submitted:\n\n` +
         `-----------------------------------------\n` +
         `Full Name: ${fullName}\n` +

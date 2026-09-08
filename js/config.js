@@ -24,23 +24,29 @@ const HK_CONFIG = {
   WEB3FORMS_ACCESS_KEY: resolveEnv("WEB3FORMS_ACCESS_KEY", "your_web3forms_access_key_here"),
 
   // Client recipient email where customer enquiries will be delivered
-  CLIENT_EMAIL: resolveEnv("CLIENT_EMAIL", "contact@hklogistics.com"),
+  CLIENT_EMAIL: resolveEnv("CLIENT_EMAIL", "info@htlogistics-spolka.com"),
 
   // Public corporate email displayed across website UI
-  PUBLIC_EMAIL: "contact@hklogistics.com",
+  PUBLIC_EMAIL: "info@htlogistics-spolka.com",
 
   // Corporate phone line
   PHONE: "+1 (800) 555-HKLOG",
   PHONE_RAW: "+18005554564",
 
-  // Corporate Headquarters & Distribution Center Address
-  ADDRESS_LINE_1: "HK Logistics Distribution Park",
-  ADDRESS_LINE_2: "Gateway Commercial Corridor, Suite 400",
-  ADDRESS_CITY: "Logistics Hub, Regional Freight Zone",
+  // Corporate Headquarters & Official Legal Registration
+  COMPANY_NAME: "HK Logistic Sp. z o.o.",
+  ADDRESS_LINE_1: "HK Logistic Sp. z o.o.",
+  ADDRESS_LINE_2: "Janusza Korczaka 5",
+  ADDRESS_CITY: "43-200 Pszczyna, Poland",
+
+  // Official Polish Business Identifiers
+  NIP: "PL6381808445",
+  REGON: "243388250",
+  KRS: "0000480091",
 
   // Customer Service & Operations Hours
   OPERATIONS_DESK: "24/7 Active Logistics & Dispatch Desk",
-  OFFICE_HOURS: "Monday – Friday: 08:00 AM – 06:00 PM EST",
+  OFFICE_HOURS: "Monday – Friday: 08:00 AM – 06:00 PM CET",
 
   // Core Service Offerings (used in forms and quick selectors)
   SERVICES: [

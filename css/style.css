@@ -6,27 +6,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 :root {
-  /* HK LOGISTICS Official Brand Palette - Based on Logo */
-  --primary: #0A3871;          /* Deep Navy Blue from "HK" mark */
-  --primary-light: #134B8F;
-  --primary-dark: #072247;
-  --primary-rgb: 10, 56, 113;
+  /* HK LOGISTIC Official Brand Palette - Red, Gold/Yellow, Black/Dark Gray & White */
+  --primary: #111827;          /* Solid Black / Deep Charcoal */
+  --primary-light: #1F2937;
+  --primary-dark: #0A0D14;
+  --primary-rgb: 17, 24, 39;
   
-  --charcoal: #424F5C;         /* Dark Slate / Charcoal from warehouse silhouette & LOGISTICS */
-  --charcoal-dark: #2A333C;
-  --charcoal-light: #64748B;
-  --charcoal-rgb: 66, 79, 92;
+  --charcoal: #374151;         /* Corporate Dark Slate / Gray */
+  --charcoal-dark: #1F2937;
+  --charcoal-light: #6B7280;
+  --charcoal-rgb: 55, 65, 81;
 
-  --accent: #1D5FA8;           /* Refined Corporate Steel Accent Blue */
-  --accent-hover: #14467D;
-  --accent-light: #EFF6FF;
-  --accent-rgb: 29, 95, 168;
+  --accent: #DC2626;           /* Precision Corporate Red from Logo */
+  --accent-hover: #B91C1C;
+  --accent-light: #FEF2F2;
+  --accent-rgb: 220, 38, 38;
 
-  --secondary: #424F5C;
-  --secondary-dark: #2A333C;
+  --gold: #D97706;             /* Warm Corporate Gold / Amber Yellow from Logo */
+  --gold-hover: #B45309;
+  --gold-light: #FEF3C7;
+  --gold-rgb: 217, 119, 6;
 
-  --success: #0D9488;
-  --success-light: #F0FDFA;
+  --secondary: #374151;
+  --secondary-dark: #1F2937;
+
+  --success: #059669;
+  --success-light: #ECFDF5;
 
   /* Surfaces & Neutrals */
   --bg-white: #FFFFFF;
@@ -203,8 +208,10 @@ ul {
 }
 
 .brand-logo img {
-  height: 48px;
+  height: 52px;
   width: auto;
+  max-width: 220px;
+  object-fit: contain;
 }
 
 .main-nav {
@@ -332,13 +339,13 @@ ul {
 .btn-primary {
   background-color: var(--accent);
   color: var(--text-white);
-  box-shadow: 0 4px 14px rgba(232, 89, 12, 0.35);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
 }
 
 .btn-primary:hover {
   background-color: var(--accent-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(232, 89, 12, 0.45);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.45);
   color: var(--text-white);
 }
 
@@ -432,9 +439,9 @@ ul {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(232, 89, 12, 0.15);
-  border: 1px solid rgba(232, 89, 12, 0.4);
-  color: #FFA94D;
+  background: rgba(220, 38, 38, 0.18);
+  border: 1px solid rgba(220, 38, 38, 0.45);
+  color: #FBBF24;
   font-size: 0.8125rem;
   font-weight: 700;
   padding: 6px 14px;
@@ -712,7 +719,7 @@ ul {
 .service-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-xl);
-  border-color: rgba(232, 89, 12, 0.4);
+  border-color: rgba(220, 38, 38, 0.4);
 }
 
 .service-card-media {
@@ -1073,7 +1080,7 @@ ul {
   outline: none;
   border-color: var(--accent);
   background-color: var(--bg-white);
-  box-shadow: 0 0 0 4px rgba(232, 89, 12, 0.12);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.15);
 }
 
 .slider-container {
@@ -1115,7 +1122,7 @@ ul {
   border-radius: 50%;
   background: var(--accent);
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(232, 89, 12, 0.4);
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.4);
   transition: var(--transition);
 }
 
@@ -1203,6 +1210,13 @@ ul {
   grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
   gap: 48px;
   margin-bottom: 60px;
+}
+
+.footer-brand > img {
+  height: 52px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
 }
 
 .footer-brand p {
@@ -1569,6 +1583,12 @@ ul {
   margin-bottom: 32px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border-light);
+}
+
+.drawer-header img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
 }
 
 .drawer-close {
