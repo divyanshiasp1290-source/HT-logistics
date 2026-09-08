@@ -1,0 +1,8 @@
+<!-- TAPA Security Certified Badge -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 50" width="120" height="50" fill="none">
+  <rect x="1" y="1" width="118" height="48" rx="8" stroke="#CBD5E1" stroke-width="1.5" fill="#FFFFFF" />
+  <circle cx="24" cy="25" r="14" fill="#E8590C" />
+  <path d="M24 16L18 19V25C18 29 20.5 32.5 24 34C27.5 32.5 30 29 30 25V19L24 16Z" fill="#FFFFFF" />
+  <text x="44" y="21" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="800" fill="#0B1E36">TAPA CLASS A</text>
+  <text x="44" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#64748B">SECURITY</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 180" width="420" height="180" fill="none">
+  <!-- HK LOGISTICS Corporate Brand Logo (White / Light Monochrome for Dark Backgrounds) -->
+  <g id="hk-symbol">
+    <!-- Letter 'H' in Pure White -->
+    <path d="M25 35 H55 V72 H95 V35 H125 V125 H95 V88 H55 V125 H25 Z" fill="#FFFFFF" />
+    
+    <!-- Letter 'K' Left Chevron in Pure White -->
+    <path d="M125 78 L170 35 H205 L152 82 L205 125 H170 L135 90 Z" fill="#FFFFFF" />
+    
+    <!-- Warehouse Roof Outline in Light Slate -->
+    <path d="M198 36 L265 36 L345 74 L345 125 H330 L330 80 L260 48 L200 48 Z" fill="#94A3B8" />
+    
+    <!-- Pallet & Stacked Cargo Boxes in Light Slate -->
+    <rect x="232" y="117" width="68" height="8" rx="2" fill="#94A3B8" />
+    <rect x="238" y="113" width="16" height="4" fill="#94A3B8" />
+    <rect x="258" y="113" width="16" height="4" fill="#94A3B8" />
+    <rect x="278" y="113" width="16" height="4" fill="#94A3B8" />
+    
+    <!-- Bottom Left Box -->
+    <rect x="234" y="93" width="28" height="18" rx="2" fill="#94A3B8" />
+    <line x1="248" y1="93" x2="248" y2="100" stroke="#0B1E36" stroke-width="1.5" />
+    
+    <!-- Bottom Right Box -->
+    <rect x="268" y="93" width="28" height="18" rx="2" fill="#94A3B8" />
+    <line x1="282" y1="93" x2="282" y2="100" stroke="#0B1E36" stroke-width="1.5" />
+    
+    <!-- Top Center Box -->
+    <rect x="251" y="73" width="28" height="18" rx="2" fill="#94A3B8" />
+    <line x1="265" y1="73" x2="265" y2="80" stroke="#0B1E36" stroke-width="1.5" />
+  </g>
+  
+  <!-- "LOGISTICS" Wordmark in Soft White -->
+  <text x="210" y="162" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Arial Black', -apple-system, sans-serif" font-size="34" font-weight="900" fill="#F8FAFC" letter-spacing="9">LOGISTICS</text>
+</svg>

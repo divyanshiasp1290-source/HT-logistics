@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 60" width="320" height="60" fill="none">
+  <!-- Brand Symbol / Emblem -->
+  <g transform="translate(4, 6)">
+    <rect x="0" y="0" width="48" height="48" rx="10" fill="#E8590C" />
+    <path d="M12 12H18V36H12V12Z" fill="#FFFFFF" />
+    <path d="M18 21H30V27H18V21Z" fill="#0B1E36" />
+    <path d="M30 12H36V36H30V12Z" fill="#FFFFFF" />
+    <path d="M22 6L40 24L36 28L20 12L22 6Z" fill="#FFFFFF" opacity="0.95" />
+    <circle cx="38" cy="14" r="3" fill="#FFFFFF" />
+  </g>
+  <!-- Brand Typography -->
+  <text x="64" y="32" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">HT</text>
+  <text x="105" y="32" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="1">LOGISTICS</text>
+  <!-- Accent Line -->
+  <rect x="64" y="38" width="240" height="2.5" rx="1.25" fill="#334155" />
+  <rect x="64" y="38" width="45" height="2.5" rx="1.25" fill="#E8590C" />
+  <!-- Subtitle Tagline -->
+  <text x="64" y="50" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="700" fill="#94A3B8" letter-spacing="2.2">WAREHOUSING &amp; DISTRIBUTION</text>
+</svg>

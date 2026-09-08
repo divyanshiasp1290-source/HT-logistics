@@ -1,0 +1,8 @@
+<!-- ISO 9001:2015 Certification Badge -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 50" width="120" height="50" fill="none">
+  <rect x="1" y="1" width="118" height="48" rx="8" stroke="#CBD5E1" stroke-width="1.5" fill="#FFFFFF" />
+  <circle cx="24" cy="25" r="14" fill="#0B1E36" />
+  <path d="M18 25L22 29L30 20" stroke="#E8590C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <text x="44" y="21" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="800" fill="#0B1E36">ISO 9001</text>
+  <text x="44" y="34" font-family="'Plus Jakarta Sans', sans-serif" font-size="8.5" font-weight="700" fill="#64748B">CERTIFIED</text>
+</svg>
