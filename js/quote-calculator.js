@@ -1,5 +1,5 @@
 /**
- * HT Logistics - B2B Warehousing & Distribution Estimator
+ * HK Logistic Sp. z o.o - B2B Warehousing & Distribution Estimator
  */
 
 document.addEventListener('DOMContentLoaded', () => {

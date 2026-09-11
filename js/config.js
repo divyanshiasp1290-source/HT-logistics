@@ -1,10 +1,10 @@
 /**
- * HK LOGISTICS - Central Client Configuration
+ * HK Logistic Sp. z o.o - Central Client Configuration
  * 
  * IMPORTANT FOR CLIENT:
  * 1. Web3Forms Access Key is loaded from environment variables (window.ENV or process.env).
  *    Get your Access Key by entering your email at https://web3forms.com
- * 2. Update the contact details below when final email/phone details are confirmed.
+ * 2. Update the contact details below when final email details are confirmed.
  */
 
 // Environment variable resolution helper
@@ -24,18 +24,14 @@ const HK_CONFIG = {
   WEB3FORMS_ACCESS_KEY: resolveEnv("WEB3FORMS_ACCESS_KEY", "your_web3forms_access_key_here"),
 
   // Client recipient email where customer enquiries will be delivered
-  CLIENT_EMAIL: resolveEnv("CLIENT_EMAIL", "info@htlogistics-spolka.com"),
+  CLIENT_EMAIL: resolveEnv("CLIENT_EMAIL", "info@hklogisticspolka.com"),
 
   // Public corporate email displayed across website UI
-  PUBLIC_EMAIL: "info@htlogistics-spolka.com",
-
-  // Corporate phone line
-  PHONE: "+1 (800) 555-HKLOG",
-  PHONE_RAW: "+18005554564",
+  PUBLIC_EMAIL: "info@hklogisticspolka.com",
 
   // Corporate Headquarters & Official Legal Registration
-  COMPANY_NAME: "HK Logistic Sp. z o.o.",
-  ADDRESS_LINE_1: "HK Logistic Sp. z o.o.",
+  COMPANY_NAME: "HK Logistic Sp. z o.o",
+  ADDRESS_LINE_1: "HK Logistic Sp. z o.o",
   ADDRESS_LINE_2: "Janusza Korczaka 5",
   ADDRESS_CITY: "43-200 Pszczyna, Poland",
 

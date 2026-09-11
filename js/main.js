@@ -1,5 +1,5 @@
 /**
- * HK LOGISTICS - Main UX & Interactions Engine
+ * HK Logistic Sp. z o.o - Main UX & Interactions Engine
  * 
  * Features:
  * - Dynamic config binding (email, phone, address from HK_CONFIG)
@@ -25,19 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function applyConfigBindings() {
   if (typeof HK_CONFIG === 'undefined') return;
 
-  // Bind phone
-  document.querySelectorAll('[data-bind-phone]').forEach(el => {
-    el.textContent = HK_CONFIG.PHONE;
-    if (el.tagName === 'A') {
-      el.setAttribute('href', `tel:${HK_CONFIG.PHONE_RAW}`);
-    }
-  });
-
   // Bind public email
   document.querySelectorAll('[data-bind-email]').forEach(el => {
     const displayEmail = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.PUBLIC_EMAIL) 
       ? HK_CONFIG.PUBLIC_EMAIL 
-      : 'info@htlogistics-spolka.com';
+      : 'info@hklogisticspolka.com';
     el.textContent = displayEmail;
     if (el.tagName === 'A') {
       el.setAttribute('href', `mailto:${displayEmail}`);
@@ -188,7 +180,7 @@ function initToast() {
     document.body.appendChild(toastContainer);
   }
 
-  window.showToast = (message, title = 'HK Logistics') => {
+  window.showToast = (message, title = 'HK Logistic Sp. z o.o') => {
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = `
@@ -296,7 +288,7 @@ function initEnquiryForms() {
 
       const clientEmail = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.CLIENT_EMAIL)
         ? HK_CONFIG.CLIENT_EMAIL
-        : 'info@htlogistics-spolka.com';
+        : 'info@hklogisticspolka.com';
 
       const accessKey = (typeof HK_CONFIG !== 'undefined' && HK_CONFIG.WEB3FORMS_ACCESS_KEY)
         ? HK_CONFIG.WEB3FORMS_ACCESS_KEY
@@ -315,9 +307,9 @@ function initEnquiryForms() {
         !uuidRegex.test(accessKey.trim());
 
       // Prepare mailto fallback payload
-      const emailSubject = encodeURIComponent(`HK Logistic Sp. z o.o. Service Enquiry: ${service} - ${company}`);
+      const emailSubject = encodeURIComponent(`HK Logistic Sp. z o.o Service Enquiry: ${service} - ${company}`);
       const emailBody = encodeURIComponent(
-        `Dear HK Logistic Commercial Team,\n\n` +
+        `Dear HK Logistic Sp. z o.o Commercial Team,\n\n` +
         `A new corporate enquiry has been submitted:\n\n` +
         `-----------------------------------------\n` +
         `Full Name: ${fullName}\n` +
@@ -380,8 +372,8 @@ function initEnquiryForms() {
       payload.set('service', service);
       payload.set('scale', pallets);
       payload.set('message', details);
-      payload.set('subject', `New Corporate Enquiry: ${service} - ${company}`);
-      payload.set('from_name', 'HK Logistics Enquiry Desk');
+      payload.set('subject', `New Corporate RFQ Enquiry - HK Logistic Sp. z o.o: ${service} - ${company}`);
+      payload.set('from_name', 'HK Logistic Sp. z o.o');
 
       try {
         const response = await fetch(endpoint, {
@@ -410,7 +402,7 @@ function initEnquiryForms() {
                 <svg style="color:#059669; flex-shrink:0;" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
                 <div>
                   <strong style="font-size:0.95rem; color:#065F46; display:block; margin-bottom:2px;">Enquiry Successfully Sent!</strong>
-                  <span style="font-size:0.875rem; color:#047857;">Thank you for contacting HK Logistics. Our team will review your requirements and get back to you shortly.</span>
+                  <span style="font-size:0.875rem; color:#047857;">Thank you for contacting HK Logistic Sp. z o.o. Our team will review your requirements and get back to you shortly.</span>
                 </div>
               </div>
             `;
